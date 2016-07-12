@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int dp[21][3][3];
+int dg[30]={0};
+int n;
+int calc(int i,bool ok,bool pra, bool prb, int mem){
+
+    int &t= dp[i][ok][mem];
+    if (t>-1) return t;
+    if(i<=17) {
+            if (mem==0&&ok&&pra&&prb)  t=1; else t=0; return t;
+    }
+    for(int k=0;k<=9;k++)
+        for(int j=0;j<=9;j++)
+            if ((k+j+mem)%10==dg[i]){
+                int nmem= (k+j+mem)/10;
+                bool nok=ok||(j==6)||(j==8)||(k==6)||(k==8);
+
+                t+=calc(i-1,nok,pra|(k>0),prb|(j>0),nmem);
+            }
+    return t;
+}
+void pt(int n)
+{
+    int c=0;
+    while(n>0){
+        dg[19-c]=n%10;
+        n/=10;
+        c++;
+    }
+}
+int main()
+{
+    cin>>n;
+    pt(n);
+    memset(dp,-1,sizeof(dp));
+    int res=calc(19,0,0,0,0);
+    cout<<res;
+    return 0;
+}
