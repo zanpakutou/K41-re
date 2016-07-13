@@ -25,7 +25,7 @@ long long calc(int i, int mod)
       t=0;
       for(int j=(i==1)?1:0;j<=9;j++)
       {     ///cout<<j<<'\n';
-           if (i<n/2) t+= calc(i+1,(mod+j*(mn[i-1]+mn[n-i]))%m); else
+           if (i<=n/2) t+= calc(i+1,(mod+j*(mn[i-1]+mn[n-i]))%m); else
                   t+= calc(i+1,(mod+j*(mn[i]))%m);
       }
       return t;
@@ -44,11 +44,11 @@ void  mul(int i,int mod)
        for(int j=(i==1)?1:0;j<=9;j++)
       {
             long long  x;
-            if (i<n/2) x= calc(i+1,(mod+j*(mn[i-1]+mn[n-i]))%m);
+            if (i<=n/2) x= calc(i+1,(mod+j*(mn[i-1]+mn[n-i]))%m);
             else x= calc(i+1,(mod+j*(mn[i]))%m);
             if (k>x) k-=x; else {
                         res[i]=j;
-                        if (i<n/2) mul(i+1,(mod+j*(mn[i-1]+mn[n-i]))%m);
+                        if (i<=n/2) mul(i+1,(mod+j*(mn[i-1]+mn[n-i]))%m);
                         else mul(i+1,(mod+j*(mn[i]))%m);
                         break;
             }
