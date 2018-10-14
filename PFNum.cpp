@@ -2,7 +2,7 @@
 
 using namespace std;
 
-long long dp[21][11][11][4][4];
+long long dp[21][11][11][4][5];
 long long a,b;
 int dg[25]={0};
 void pt(long long n)
